@@ -1,0 +1,165 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+* {
+    --cor-de-fundo: #F3F3F3;
+    --cor-bordas: #FFFFFF;
+}
+
+body{
+    background-color: var(--cor-de-fundo);
+    font-family: 'Roboto', sans-serif;
+}
+
+.Tela-Entrada{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background-color: #FFFFFF;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.Tela-Entrada img{
+    margin: 72px 0;
+    width: 130px;
+}
+
+.Tela-Entrada input{
+    font-size: 18px;
+    padding: 16px 20px;
+    display: flex;
+    text-align: center;
+    margin: 15px;
+    border: 1px solid #D7D7D7;
+    border-radius: 4px;
+}
+
+.Tela-Entrada button{
+    font-size: 18px;
+    color: #696969;
+    background-color: #E7E7E7;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 9px;
+}
+
+
+
+
+
+header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 80px;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--cor-bordas);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+header img{
+    margin: 22px;
+}
+
+main{
+    margin-top: 106px;
+}
+
+main p{
+    height: auto;
+    display: flex;
+    align-items: center;
+    border-radius: 2px;
+    width: 100vw;
+    margin: 4px 0;
+    padding: 5px;
+    flex-wrap: wrap;
+}
+
+span{
+    color: #AAAAAA;
+    margin: 8px ;
+}
+
+p.entrada,
+p.saida{
+    background-color: #DCDCDC;
+}
+
+p.mensagem{
+    background-color: #FFFFFF;;
+}
+
+p.mensagem-reservada{
+    background-color: #FFDEDE;
+}
+
+strong{
+    font-weight: 700;
+    margin: 3px;
+}
+
+
+footer{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 80px;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--cor-bordas);
+    box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.05);
+}
+
+footer input{
+    height: 30px;
+    margin: 17px;
+    border: none;
+}
+
+footer button{
+    margin: 18px;
+    background-color: transparent;
+    border: none;
+}
+
+.Menu{
+    background: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    z-index: 1;
+}
+
+nav{
+    width: 256px;
+    height: 100vh;
+    background-color: #FFFFFF;
+    position: fixed;
+    right: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+nav h3{
+    font-size: 16px;
+    font-weight: 700;
+    padding: 30px;
+}
+
+.escondido{
+    display: none;
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/reset.css">
+    <link rel="stylesheet" href="style/style.css">
+    <title>Bate-Papo UOL</title>
+</head>
+
+<body>
+    <header>
+    <img src="Images/logo.svg" alt="Logo UOL">
+    <img onclick="Menu()"src="Images/People.svg" alt="Menu">
+    </header>
+
+    <div class="Tela-Entrada">
+        <img src="Images/logo.svg" alt="Logo UOL">
+        <input type="text" class="Nome" placeholder="Digite o seu nome">
+        <button onclick="ValidarNome()">Entrar</button>
+    </div>
+
+    <div class="Menu escondido">
+    <nav>
+        <h3>Escolha um contato para enviar mensagem:</h3>
+        <p>nada</p>
+    </nav>
+    </div>
+
+
+    <main>
+        <p class="entrada"><span class="tempo">(09:21:45) </span>  <strong>João</strong>  entra na sala...</p>
+        <p class="mensagem"><span class="tempo">(09:22:28)</span>  <strong>João</strong> para <strong>Todos</strong>:  Bom dia</p>
+        <p class="mensagem"><span class="tempo">(09:22:38)</span>  <strong>Maria</strong> para <strong>João</strong>:  Oi João :)</p>
+        <p class="mensagem-reservada"><span class="tempo">(09:22:48)</span>  <strong>João</strong> reservadamente para <strong>Maria</strong>: Oi gatinha quer tc?</p>
+        <p class="saida"><span class="tempo">(09:22:58)</span>  <strong>Maria</strong>  sai da sala...</p>
+    </main>
+
+
+
+    <footer>
+        <input type="text" name="input" placeholder="Escreva aqui...">
+        <button><img src="Images/Plane.svg" alt="Send Button"></button>
+    </footer>
+
+
+    <script src="script/script.js"></script>
+</body>
+
+</html>
