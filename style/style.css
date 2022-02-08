@@ -1,15 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
+
+/* Definindo cores usadas */
 * {
     --cor-de-fundo: #F3F3F3;
     --cor-bordas: #FFFFFF;
 }
 
+
+/* ------------ Definindo atibuiçoes gerais -------------- */
 body{
     background-color: var(--cor-de-fundo);
     font-family: 'Roboto', sans-serif;
 }
 
+
+/* ------------ Tela de entrada do usuário -------------- */
 .Tela-Entrada{
     position: fixed;
     width: 100vw;
@@ -47,10 +53,7 @@ body{
     border-radius: 9px;
 }
 
-
-
-
-
+/* ----------- Barra do topo da página --------------- */
 header{
     position: fixed;
     top: 0;
@@ -68,6 +71,8 @@ header img{
     margin: 22px;
 }
 
+
+/* ----------- Mensagens do chat --------------- */
 main{
     margin-top: 106px;
 }
@@ -82,12 +87,13 @@ main p{
     padding: 5px;
     flex-wrap: wrap;
 }
-
+ /* ------------ Hora da mensagem -------------- */
 span{
     color: #AAAAAA;
     margin: 8px ;
 }
 
+/* ------------ Cores de fundo de cada mensagem -------------- */
 p.entrada,
 p.saida{
     background-color: #DCDCDC;
@@ -101,12 +107,14 @@ p.mensagem-reservada{
     background-color: #FFDEDE;
 }
 
+/* ------------ Nomes em negrito -------------- */
 strong{
     font-weight: 700;
     margin: 3px;
 }
 
 
+/* ------------ Barra inferior com envio de mensagens-------------- */
 footer{
     position: fixed;
     bottom: 0;
@@ -132,7 +140,9 @@ footer button{
     border: none;
 }
 
-.Menu{
+
+/* ------------ Fundo do Menu com cor escurecida -------------- */
+.voltar{
     background: rgba(0, 0, 0, 0.6);
     position: fixed;
     width: 100vw;
@@ -141,11 +151,13 @@ footer button{
     z-index: 1;
 }
 
+/* ------------ Menu de opções -------------- */
 nav{
     width: 256px;
     height: 100vh;
     background-color: #FFFFFF;
     position: fixed;
+    z-index: 1;
     right: 0;
     top: 0;
     display: flex;
@@ -160,6 +172,8 @@ nav h3{
     padding: 30px;
 }
 
+
+/* ------------ Classe para esconder algumas partes da página -------------- */
 .escondido{
     display: none;
 }
