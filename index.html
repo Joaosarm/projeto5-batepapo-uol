@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style/reset.css">
     <link rel="stylesheet" href="style/style.css">
     <title>Bate-Papo UOL</title>
+    <link rel="icon" type="image/x-icon" href="Images/logo-uol-icon.png">
 </head>
 
 <body>
@@ -18,7 +19,7 @@
 
 
     <div class="Tela-Entrada">
-        <img src="Images/logo.svg" alt="Logo UOL">
+        <img src="Images/uol-logo.svg" alt="Logo UOL">
         <input type="text" class="Nome" placeholder="Digite o seu nome">
         <button onclick="ValidarNome()">Entrar</button>
     </div>
@@ -29,27 +30,23 @@
         <div onclick="Voltar()" class="voltar"></div>
     <nav>
         <h3>Escolha um contato para enviar mensagem:</h3>
-        <p>nada</p>
+        <div class="PessoasOnline"></div>
     </nav>
+    
     </div>
 
 
     <main>
-        <p class="entrada"><span class="tempo">(09:21:45) </span>  <strong>João</strong>  entra na sala...</p>
-        <p class="mensagem"><span class="tempo">(09:22:28)</span>  <strong>João</strong> para <strong>Todos</strong>:  Bom dia</p>
-        <p class="mensagem"><span class="tempo">(09:22:38)</span>  <strong>Maria</strong> para <strong>João</strong>:  Oi João :)</p>
-        <p class="mensagem-reservada"><span class="tempo">(09:22:48)</span>  <strong>João</strong> reservadamente para <strong>Maria</strong>: Oi gatinha quer tc?</p>
-        <p class="saida"><span class="tempo">(09:22:58)</span>  <strong>Maria</strong>  sai da sala...</p>
     </main>
 
 
 
     <footer>
-        <input type="text" name="input" placeholder="Escreva aqui...">
-        <button><img src="Images/Plane.svg" alt="Send Button"></button>
+        <input class="MensagemNova" type="text" name="input" placeholder="Escreva aqui...">
+        <button onclick="MandarMensagem()"><img src="Images/Plane.svg" alt="Send Button"></button>
     </footer>
 
-
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="script/script.js"></script>
 </body>
 

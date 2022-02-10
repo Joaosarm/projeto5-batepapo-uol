@@ -7,6 +7,9 @@
     --cor-bordas: #FFFFFF;
 }
 
+input:focus {
+    outline: 0;
+}
 
 /* ------------ Definindo atibuiçoes gerais -------------- */
 body{
@@ -30,8 +33,8 @@ body{
 }
 
 .Tela-Entrada img{
-    margin: 72px 0;
-    width: 130px;
+    margin: 40px 0;
+    width: 230px;
 }
 
 .Tela-Entrada input{
@@ -39,7 +42,7 @@ body{
     padding: 16px 20px;
     display: flex;
     text-align: center;
-    margin: 15px;
+    margin-bottom: 15px;
     border: 1px solid #D7D7D7;
     border-radius: 4px;
 }
@@ -74,7 +77,7 @@ header img{
 
 /* ----------- Mensagens do chat --------------- */
 main{
-    margin-top: 106px;
+    margin: 106px 0;
 }
 
 main p{
@@ -90,20 +93,19 @@ main p{
  /* ------------ Hora da mensagem -------------- */
 span{
     color: #AAAAAA;
-    margin: 8px ;
+    padding: 8px ;
 }
 
 /* ------------ Cores de fundo de cada mensagem -------------- */
-p.entrada,
-p.saida{
+p.status{
     background-color: #DCDCDC;
 }
 
-p.mensagem{
-    background-color: #FFFFFF;;
+p.message{
+    background-color: #FFFFFF;
 }
 
-p.mensagem-reservada{
+p.private_message{
     background-color: #FFDEDE;
 }
 
@@ -129,9 +131,12 @@ footer{
 }
 
 footer input{
+    font-size: 16px;
     height: 30px;
     margin: 17px;
     border: none;
+    width: 100%;
+    height: 50%;
 }
 
 footer button{
@@ -176,4 +181,8 @@ nav h3{
 /* ------------ Classe para esconder algumas partes da página -------------- */
 .escondido{
     display: none;
+}
+
+.ease-in{
+    transition: 2s;
 }
