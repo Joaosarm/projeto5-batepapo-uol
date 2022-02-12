@@ -17,20 +17,36 @@
     </header>
 
 
-
     <div class="Tela-Entrada">
         <img src="Images/uol-logo.svg" alt="Logo UOL">
-        <input type="text" class="Nome" placeholder="Digite o seu nome">
-        <button onclick="ValidarNome()">Entrar</button>
+        <input data-identifier="enter-name" type="text" class="Nome" placeholder="Digite o seu nome">
+        <button data-identifier="start" onclick="ValidarNome()">Entrar</button>
     </div>
-
-
     
     <div class="Menu escondido">
         <div onclick="Voltar()" class="voltar"></div>
     <nav>
         <h3>Escolha um contato para enviar mensagem:</h3>
+        
+        <div class="Pessoas">
+            <div class="todos" onclick="SelecionarParticipante(this,'Todos')">
+                <div class="nome"> <img src="images/Todos.svg" alt="Todos">Todos</div>
+                <div class="selecao"> <img src="images/check.svg" class ="check selecionado" alt="Check"> </div> 
+            </div>
         <div class="PessoasOnline"></div>
+        </div>
+
+        <h3>Escolha a visibilidade:</h3>
+        <div class="visibilidade">
+            <div onclick="SelecionarVisibilidade(this,'message')">
+                <div><img src="images/visibilidade.svg" alt="Visibilidade">Público</div>
+                <div><img class="check selecionado" src="Images/check.svg" alt="Check"></div>
+            </div>
+            <div onclick="SelecionarVisibilidade(this,'private_message')">
+                <div><img src="images/visibilidade.svg" alt="Visibilidade">Reservadamente</div>
+                <div><img class="check" src="Images/check.svg" alt="Check"></div>
+            </div>
+        </div>
     </nav>
     
     </div>
@@ -40,10 +56,9 @@
     </main>
 
 
-
     <footer>
         <input class="MensagemNova" type="text" name="input" placeholder="Escreva aqui...">
-        <button onclick="MandarMensagem()"><img src="Images/Plane.svg" alt="Send Button"></button>
+        <button onclick="MandarMensagem()" data-identifier="send-message"><img src="Images/Plane.svg" alt="Send Button"></button>
     </footer>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>

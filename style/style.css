@@ -80,7 +80,7 @@ main{
     margin: 106px 0;
 }
 
-main p{
+main div{
     height: auto;
     display: flex;
     align-items: center;
@@ -88,7 +88,11 @@ main p{
     width: 100vw;
     margin: 4px 0;
     padding: 5px;
-    flex-wrap: wrap;
+}
+main p{
+    width: 75%;
+    word-wrap: break-word;
+    margin: 5px;
 }
  /* ------------ Hora da mensagem -------------- */
 span{
@@ -97,15 +101,15 @@ span{
 }
 
 /* ------------ Cores de fundo de cada mensagem -------------- */
-p.status{
+.status{
     background-color: #DCDCDC;
 }
 
-p.message{
+.message{
     background-color: #FFFFFF;
 }
 
-p.private_message{
+.private_message{
     background-color: #FFDEDE;
 }
 
@@ -167,7 +171,6 @@ nav{
     top: 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
     text-align: center;
 }
 
@@ -177,6 +180,28 @@ nav h3{
     padding: 30px;
 }
 
+.visibilidade div,
+.Pessoas .todos,
+.PessoasOnline div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3px 15px;
+    height: 30px;
+}
+
+.Pessoas .todos{
+    padding: 3px 28px;
+}
+
+.visibilidade div img,
+.Pessoas .todos img,
+.PessoasOnline div img{
+    margin: 0 5px;
+}
+
+
+
 
 /* ------------ Classe para esconder algumas partes da página -------------- */
 .escondido{
@@ -185,4 +210,12 @@ nav h3{
 
 .ease-in{
     transition: 2s;
+}
+
+.check{
+    display: none;
+}
+
+.selecionado{
+    display: block;
 }

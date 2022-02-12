@@ -1,5 +1,5 @@
 let mensagens = [];                         // Array que segura todas as mensagens da API
-let contador = 99;                          // Contador que diz qual a primeira mensagem que aparecerá na tela
+let contador = 0;                           // Contador que diz qual a primeira mensagem que aparecerá na tela
 let TipoDeMensagem = 'message';             // Tipo de mensagem inicial selecionada
 let Remetente = 'todos';                    // Remetente inicial selecionado
 let UltimaMensagem;                         // Guarda a ultima mensagem para poder colocar as novas mensagens na tela
@@ -13,13 +13,15 @@ let NomeUsuário = [];                       // Nome que o usuário escolhe
 function IniciarChat(){
     TrazerMensagensServidor();
     setInterval(TrazerMensagensServidor,3000);
-    setInterval(MostrarMensagens,500);
+    // setInterval(MostrarMensagens,500);
 }
 
 //Trazer mensagens do servidor
 function TrazerMensagensServidor(){
     const promessa = axios.get('https://mock-api.driven.com.br/api/v4/uol/messages');
     promessa.then(CarregarMensagens);
+    promessa.catch(ErroCarregamento);
+    MostrarMensagens();
 }
 
 
@@ -30,31 +32,44 @@ function CarregarMensagens(mensagem) {
 }
 
 
-//Funçao para mostrar as mensagens na tela
+//Caso carregamento de mensagens de erro
+function ErroCarregamento(){
+    alert('Houve um erro de carregamento das mensagens!');
+    window.location.reload();
+}
+
 function MostrarMensagens(){
-    if(contador<mensagens.length){
+    chat.innerHTML = ''
+    for(contador=0;contador<mensagens.length;contador++){
         SelecionarMensagem();
-        UltimaMensagem = mensagens[contador];
-        contador++;
-    } else{
-        if(mensagens[contador-1] !== UltimaMensagem){
-            contador = procurarIndice(UltimaMensagem.name,UltimaMensagem.text);
-        }
     }
 }
 
 
+//Funçao para mostrar as mensagens na tela
+// function MostrarMensagens(){
+//     if(contador<mensagens.length){
+//         SelecionarMensagem();
+//         UltimaMensagem = mensagens[contador];
+//         contador++;
+//     } else{
+//         if(mensagens[contador-1] !== UltimaMensagem){
+//             contador = procurarIndice(UltimaMensagem.name,UltimaMensagem.text);
+//         }
+//     }
+// }
+
+
 //Procurar ultima mensagem enviada no array anterior
-function procurarIndice(nome, mensagem){
-    var cont=0;
-    let indice;
-    for(let i=0;i<mensagens.length;i++){
-       if(mensagens[i].name==nome&&mensagens[i].text==mensagem){
-          indice=i;
-       }
-    }
-    return indice+1;
- }
+// function procurarIndice(nome, mensagem){
+//     let indice;
+//     for(let i=0;i<mensagens.length;i++){
+//        if(mensagens[i].name==nome&&mensagens[i].text==mensagem){
+//           indice=i;
+//        }
+//     }
+//     return indice+1;
+//  }
 
 
 //Selecionar qual o tipo de mensagem
@@ -68,7 +83,7 @@ function SelecionarMensagem(){
 
 //Formato da mensagem de status
 function mensagemDeStatus(){
-    chat.innerHTML += `<p class="${mensagens[contador].type}"><span class="s${contadorScroll}">(${mensagens[contador].time}) </span>  <strong>${mensagens[contador].from}</strong> ${mensagens[contador].text}</p>`;
+    chat.innerHTML += `<div data-identifier="message" class="${mensagens[contador].type}"><span class="s${contadorScroll}">(${mensagens[contador].time}) </span> <p> <strong>${mensagens[contador].from}</strong> ${mensagens[contador].text}</p></div>`;
     const tempo = chat.querySelector(`.s${contadorScroll}`);
     tempo.scrollIntoView();
     contadorScroll++;
@@ -77,7 +92,7 @@ function mensagemDeStatus(){
 
 //Formato da mensagem de texto
 function MensagemDeTexto(){
-    chat.innerHTML += `<p class="${mensagens[contador].type}"><span class="s${contadorScroll}">(${mensagens[contador].time})</span>  <strong>${mensagens[contador].from}</strong> para <strong>${mensagens[contador].to}</strong>:  ${mensagens[contador].text}</p>`;
+    chat.innerHTML += `<div data-identifier="message" class="${mensagens[contador].type}"><span class="s${contadorScroll}">(${mensagens[contador].time})</span> <p>  <strong>${mensagens[contador].from}</strong> para <strong>${mensagens[contador].to}</strong>: ${mensagens[contador].text}</p></div>`;
     const tempo = chat.querySelector(`.s${contadorScroll}`);
     tempo.scrollIntoView();
     contadorScroll++;
@@ -110,7 +125,7 @@ function PostNome(){
 function NomeDisponivel(mensagem){
     if(mensagem.status==200){
         document.querySelector('.Tela-Entrada').classList.add('escondido');
-        IniciarChat();
+        // IniciarChat();
         setInterval(MaintainConection,5000);
     } else{
         alert('Algo deu errado!');
@@ -184,8 +199,40 @@ function Imprimirparticipantes(dados){
     online.innerHTML = '';
     participantes = dados.data;
     for(let i=0;i<participantes.length;i++){
-    online.innerHTML += `<p>${participantes[i].name}</p>`
+        const Usuario = participantes[i].name;
+        if(Usuario!==NomeUsuário.name){
+            if(Remetente == Usuario){
+                online.innerHTML += `<div onclick="SelecionarParticipante(this,'${Usuario}')">
+                <div class="nome"> <img src="images/Usuario.svg" alt="Usuário">${Usuario} </div>
+                <div class="selecao"> <img src="images/check.svg" class ="check selecionado" alt="Check"> </div> </div>`
+            }else{
+            online.innerHTML += `<div onclick="SelecionarParticipante(this,'${Usuario}')">
+            <div class="nome"> <img src="images/Usuario.svg" alt="Usuário">${Usuario} </div>
+            <div class="selecao"> <img src="images/check.svg" class ="check" alt="Check"> </div> </div> `
+            }
+        }
     }
+}
+
+//Selecionar o Remetente da mensagem
+function SelecionarParticipante(elemento,nome){
+    const participante = document.querySelector('.Pessoas .check.selecionado');
+    console.log(participante);
+    if(participante){
+    participante.classList.remove('selecionado');
+    elemento.querySelector('.check').classList.add('selecionado');
+    Remetente = nome;
+    } else{
+        document.querySelector('.Pessoas .check').classList.add('selecionado');
+    }
+}
+
+//Selecionar o Visibilidade da mensagem
+function SelecionarVisibilidade(elemento,TipoMensagem){
+    const participante = document.querySelector('.visibilidade .check.selecionado');
+    participante.classList.remove('selecionado');
+    elemento.querySelector('.check').classList.add('selecionado');
+    TipoDeMensagem = TipoMensagem;
 }
 
 // Função para voltar do menu à página do chat ao clicar no fundo
