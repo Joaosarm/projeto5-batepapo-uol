@@ -1,7 +1,7 @@
 let mensagens = [];                         // Array que segura todas as mensagens da API
 let contador = 0;                           // Contador que diz qual a primeira mensagem que aparecerá na tela
 let TipoDeMensagem = 'message';             // Tipo de mensagem inicial selecionada
-let Remetente = 'todos';                    // Remetente inicial selecionado
+let Remetente = 'Todos';                    // Remetente inicial selecionado
 let UltimaMensagem;                         // Guarda a ultima mensagem para poder colocar as novas mensagens na tela
 let chat = document.querySelector('main');  // Pega o main do html para colocar mensagens
 let contadorScroll = 0;                     // Contador para manter as mensagens scrolladas
@@ -92,10 +92,12 @@ function mensagemDeStatus(){
 
 //Formato da mensagem de texto
 function MensagemDeTexto(){
+    if(mensagens[contador].type==='message'||mensagens[contador].from===NomeUsuário.name||mensagens[contador].to===NomeUsuário.name){
     chat.innerHTML += `<div data-identifier="message" class="${mensagens[contador].type}"><span class="s${contadorScroll}">(${mensagens[contador].time})</span> <p>  <strong>${mensagens[contador].from}</strong> para <strong>${mensagens[contador].to}</strong>: ${mensagens[contador].text}</p></div>`;
     const tempo = chat.querySelector(`.s${contadorScroll}`);
     tempo.scrollIntoView();
     contadorScroll++;
+}
 }
 
 
@@ -107,7 +109,7 @@ function ValidarNome(){
         name: Nome
     }
 
-    if(NomeUsuário!==''){
+    if(NomeUsuário){
         PostNome();
     }
 }
@@ -125,7 +127,7 @@ function PostNome(){
 function NomeDisponivel(mensagem){
     if(mensagem.status==200){
         document.querySelector('.Tela-Entrada').classList.add('escondido');
-        // IniciarChat();
+        IniciarChat();
         setInterval(MaintainConection,5000);
     } else{
         alert('Algo deu errado!');
@@ -144,13 +146,19 @@ function NomeIndisponivel(erro){
 //Função para manter conexão, enviando o nome de usuário a cada 5 segundos
 function MaintainConection(){
     let request = axios.post('https://mock-api.driven.com.br/api/v4/uol/status',NomeUsuário);
+    request.catch(ErroDeConexão);
 }
 
+//Caso haja um erro na conexão
+function ErroDeConexão(){
+    alert('Houve um erro de conexão');
+    window.location.reload();
+}
 
 // Função para enviar mensagem para servidor
 function MandarMensagem(){
     const MensagemNova = document.querySelector('.MensagemNova').value;
-    if(MensagemNova!==''){
+    if(MensagemNova){
 
         const Mensagem = {
             from: NomeUsuário.name,
@@ -165,6 +173,13 @@ function MandarMensagem(){
         request.then(ConfirmaMensagem);
         request.catch(ErroMensagem);
 
+    }
+}
+
+//Função para enviar mensagem apertando enter
+function searchKeyPress(enter){
+    if (enter.keyCode == 13){
+        document.querySelector('footer button').click();
     }
 }
 
@@ -190,6 +205,14 @@ function Menu(){
     document.querySelector('.Menu').classList.remove('escondido');
     request = axios.get('https://mock-api.driven.com.br/api/v4/uol/participants');
     request.then(Imprimirparticipantes);
+    request.catch(ErroDeImpressãoUsuarios);
+}
+
+//Caso de erro na impressao dos usuários no menu
+function ErroDeImpressãoUsuarios(){
+    alert('Houve um erro na impressao dos usuários online!');
+    window.location.reload();
+
 }
 
 
@@ -198,32 +221,35 @@ function Imprimirparticipantes(dados){
     const online = document.querySelector('nav .PessoasOnline');
     online.innerHTML = '';
     participantes = dados.data;
+    let contSelecionado=0;
     for(let i=0;i<participantes.length;i++){
         const Usuario = participantes[i].name;
         if(Usuario!==NomeUsuário.name){
             if(Remetente == Usuario){
+                contSelecionado++;
                 online.innerHTML += `<div onclick="SelecionarParticipante(this,'${Usuario}')">
-                <div class="nome"> <img src="images/Usuario.svg" alt="Usuário">${Usuario} </div>
-                <div class="selecao"> <img src="images/check.svg" class ="check selecionado" alt="Check"> </div> </div>`
+                <div> <img src="images/Usuario.svg" alt="Usuário">${Usuario} </div>
+                <div> <img src="images/check.svg" class ="check selecionado" alt="Check"> </div> </div>`
             }else{
             online.innerHTML += `<div onclick="SelecionarParticipante(this,'${Usuario}')">
-            <div class="nome"> <img src="images/Usuario.svg" alt="Usuário">${Usuario} </div>
-            <div class="selecao"> <img src="images/check.svg" class ="check" alt="Check"> </div> </div> `
+            <div> <img src="images/Usuario.svg" alt="Usuário">${Usuario} </div>
+            <div> <img src="images/check.svg" class ="check" alt="Check"> </div> </div> `
             }
         }
+    }
+    if(contSelecionado==0){
+        document.querySelector('.Pessoas .check').classList.add('selecionado');
+
     }
 }
 
 //Selecionar o Remetente da mensagem
 function SelecionarParticipante(elemento,nome){
     const participante = document.querySelector('.Pessoas .check.selecionado');
-    console.log(participante);
     if(participante){
     participante.classList.remove('selecionado');
     elemento.querySelector('.check').classList.add('selecionado');
     Remetente = nome;
-    } else{
-        document.querySelector('.Pessoas .check').classList.add('selecionado');
     }
 }
 
@@ -231,7 +257,7 @@ function SelecionarParticipante(elemento,nome){
 function SelecionarVisibilidade(elemento,TipoMensagem){
     const participante = document.querySelector('.visibilidade .check.selecionado');
     participante.classList.remove('selecionado');
-    elemento.querySelector('.check').classList.add('selecionado');
+    elemento.querySelector('.check').classList.add('selecionado'); 
     TipoDeMensagem = TipoMensagem;
 }
 

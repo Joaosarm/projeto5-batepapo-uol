@@ -30,8 +30,8 @@
         
         <div class="Pessoas">
             <div class="todos" onclick="SelecionarParticipante(this,'Todos')">
-                <div class="nome"> <img src="images/Todos.svg" alt="Todos">Todos</div>
-                <div class="selecao"> <img src="images/check.svg" class ="check selecionado" alt="Check"> </div> 
+                <div> <img src="images/Todos.svg" alt="Todos">Todos</div>
+                <div> <img src="images/check.svg" class ="check selecionado" alt="Check"> </div> 
             </div>
         <div class="PessoasOnline"></div>
         </div>
@@ -57,7 +57,7 @@
 
 
     <footer>
-        <input class="MensagemNova" type="text" name="input" placeholder="Escreva aqui...">
+        <input class="MensagemNova" type="text" name="input" placeholder="Escreva aqui..." onkeypress="searchKeyPress(event)">
         <button onclick="MandarMensagem()" data-identifier="send-message"><img src="Images/Plane.svg" alt="Send Button"></button>
     </footer>
 
