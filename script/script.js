@@ -114,10 +114,19 @@ function ValidarNome(){
     }
 }
 
+function loading(){
+    const loadingScreen = document.querySelector('.loading');
+    const entrada = document.querySelector('.entrada');
+    console.log(entrada);
+    entrada.classList.toggle('escondido');
+    loadingScreen.classList.toggle('escondido');
+}
+
 
 //Função para dar post no nome do usuário
 function PostNome(){
     let request = axios.post('https://mock-api.driven.com.br/api/v4/uol/participants',NomeUsuário);
+    loading();
     request.then(NomeDisponivel);
     request.catch(NomeIndisponivel);
 }
@@ -141,6 +150,7 @@ function NomeIndisponivel(erro){
     } else{
         alert('Erro!(Não reconhecido)')
     }
+    window.location.reload();
 }
 
 //Função para manter conexão, enviando o nome de usuário a cada 5 segundos
@@ -227,13 +237,13 @@ function Imprimirparticipantes(dados){
         if(Usuario!==NomeUsuário.name){
             if(Remetente == Usuario){
                 contSelecionado++;
-                online.innerHTML += `<div onclick="SelecionarParticipante(this,'${Usuario}')">
-                <div> <img src="images/Usuario.svg" alt="Usuário">${Usuario} </div>
-                <div> <img src="images/check.svg" class ="check selecionado" alt="Check"> </div> </div>`
+                online.innerHTML += `<div data-identifier="participant" onclick="SelecionarParticipante(this,'${Usuario}')">
+                <div> <img src="Images/Usuario.svg" alt="Usuário">${Usuario} </div>
+                <div> <img src="Images/check.svg" class ="check selecionado" alt="Check"> </div> </div>`
             }else{
-            online.innerHTML += `<div onclick="SelecionarParticipante(this,'${Usuario}')">
-            <div> <img src="images/Usuario.svg" alt="Usuário">${Usuario} </div>
-            <div> <img src="images/check.svg" class ="check" alt="Check"> </div> </div> `
+            online.innerHTML += `<div data-identifier="participant" onclick="SelecionarParticipante(this,'${Usuario}')">
+            <div> <img src="Images/Usuario.svg" alt="Usuário">${Usuario} </div>
+            <div> <img src="Images/check.svg" class ="check" alt="Check"> </div> </div> `
             }
         }
     }
@@ -250,6 +260,9 @@ function SelecionarParticipante(elemento,nome){
     participante.classList.remove('selecionado');
     elemento.querySelector('.check').classList.add('selecionado');
     Remetente = nome;
+    if(TipoDeMensagem=='private_message'){
+        document.querySelector('footer p').innerHTML = `Enviando para ${Remetente} (reservadamente)`;
+    }
     }
 }
 
@@ -259,6 +272,11 @@ function SelecionarVisibilidade(elemento,TipoMensagem){
     participante.classList.remove('selecionado');
     elemento.querySelector('.check').classList.add('selecionado'); 
     TipoDeMensagem = TipoMensagem;
+    if(TipoDeMensagem=='private_message'){
+        document.querySelector('footer p').innerHTML = `Enviando para ${Remetente} (reservadamente)`;
+    }else{
+        document.querySelector('footer p').innerHTML = '';
+    }
 }
 
 // Função para voltar do menu à página do chat ao clicar no fundo

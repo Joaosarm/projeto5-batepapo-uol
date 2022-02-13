@@ -32,9 +32,28 @@ body{
     flex-direction: column;
 }
 
+.entrada{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.loading{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
 .Tela-Entrada img{
     margin: 40px 0;
     width: 230px;
+}
+
+.loading img{
+    margin-top: 0;
+    width: 100px;
 }
 
 .Tela-Entrada input{
@@ -116,7 +135,6 @@ span{
 /* ------------ Nomes em negrito -------------- */
 strong{
     font-weight: 700;
-    margin: 3px;
 }
 
 
@@ -137,7 +155,8 @@ footer{
 footer input{
     font-size: 16px;
     height: 30px;
-    margin: 17px;
+    margin: 0 0 3px 17px;
+    padding: 5px;
     border: none;
     width: 100%;
     height: 50%;
@@ -148,6 +167,13 @@ footer button{
     background-color: transparent;
     border: none;
 }
+
+footer p{
+    margin-left: 22px;
+    font-weight: 300;
+    color: grey;
+}
+
 
 
 /* ------------ Fundo do Menu com cor escurecida -------------- */
@@ -186,12 +212,18 @@ nav h3{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 3px 5px 3px 15px;
+    margin: 3px 5px 3px 10px;
     height: 30px;
 }
 
+.visibilidade div div:hover,
+.Pessoas .todos div:hover,
+.PessoasOnline div div:hover{
+    cursor: pointer;
+}
+
 .Pessoas .todos{
-    padding: 3px 28px;
+    margin: 3px 18px;
 }
 
 .visibilidade div img,
