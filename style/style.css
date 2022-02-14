@@ -198,6 +198,7 @@ nav{
     display: flex;
     flex-direction: column;
     text-align: center;
+    overflow: auto;
 }
 
 nav h3{
@@ -214,6 +215,10 @@ nav h3{
     align-items: center;
     margin: 3px 5px 3px 10px;
     height: 30px;
+}
+
+.visibilidade{
+    margin-bottom: 50px;
 }
 
 .visibilidade div div:hover,
